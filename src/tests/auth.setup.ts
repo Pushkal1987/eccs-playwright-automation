@@ -63,7 +63,7 @@ setup(
 
         await authenticateUser(
             page,
-            'courier'
+            'COURIER'
         );
     }
 );

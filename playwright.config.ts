@@ -1,9 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 import * as os from 'node:os';
-import dotenv from 'dotenv';
 import { env } from "./src/config/env";
-
-dotenv.config({ quiet: true });
 
 export default defineConfig({
 
@@ -76,7 +73,7 @@ export default defineConfig({
     { 
       name: 'custodian', 
       dependencies: ['setup'], 
-      testMatch: /.*custodian.*\.spec\.ts/, 
+      testMatch: /.*\.custodian\.spec\.ts/, 
       use: { 
         ...devices['Desktop Chrome'], 
         storageState: '.auth/custodian.json' 
@@ -87,7 +84,7 @@ export default defineConfig({
     { 
       name: 'acdc', 
       dependencies: ['setup'], 
-      testMatch: /.*acdc.*\.spec\.ts/, 
+      testMatch: /.*\.acdc\.spec\.ts/, 
       use: { 
         ...devices['Desktop Chrome'], 
         storageState: '.auth/acdc.json' 
@@ -98,7 +95,7 @@ export default defineConfig({
     { 
       name: 'ao', 
       dependencies: ['setup'], 
-      testMatch: /.*ao.*\.spec\.ts/, 
+      testMatch: /.*\.ao\.spec\.ts/, 
       use: { 
         ...devices['Desktop Chrome'], 
         storageState: '.auth/ao.json' 
@@ -109,34 +106,35 @@ export default defineConfig({
     { 
       name: 'inspector', 
       dependencies: ['setup'], 
-      testMatch: /.*inspector.*\.spec\.ts/, 
+      testMatch: /.*\.inspector\.spec\.ts/, 
       use: { 
         ...devices['Desktop Chrome'], 
         storageState: '.auth/inspector.json' 
       } 
     },
 
-    // End-2-End tests - reuse authenticated session
+    // End-2-End tests 
     { 
-      name: 'e2e', 
+      name: 'BusinessFlow', 
       dependencies: ['setup'], 
-      testMatch: /.*\.e2e\.spec\.ts/, 
+      testMatch: /.*\.flow\.spec\.ts/, 
       use: { 
-        ...devices['Desktop Chrome'] 
+        ...devices['Desktop Chrome'],
+        // Authentication is handled inside the E2E test for each role. 
       } 
     },
 
-    // Other Chromium tests - reuse authenticated session
+    // Other Chromium tests
     {
       name: 'Chromium',
       dependencies: ['setup'],
       testIgnore: [
         /courierLogin\.spec\.ts/,
-        /.*custodian.*\.spec\.ts/, 
-        /.*acdc.*\.spec\.ts/, 
-        /.*ao.*\.spec\.ts/, 
-        /.*inspector.*\.spec\.ts/, 
-        /.*\.e2e\.spec\.ts/
+        /.*\.flow\.spec\.ts/,
+        /.*\.custodian\.spec\.ts/, 
+        /.*\.acdc\.spec\.ts/, 
+        /.*\.ao\.spec\.ts/, 
+        /.*\.inspector\.spec\.ts/, 
       ],
 
       use: {

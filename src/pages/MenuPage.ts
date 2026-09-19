@@ -8,7 +8,7 @@ export class MenuPage extends BasePage {
     constructor(page: Page) {
         super(page);
 
-        this.mainMenuLocators = page.locator("#main-menu-sz > li.nav-item > a.nav-link");
+        this.mainMenuLocators = page.locator("#main-menu-sz>li.nav-item>a.nav-link");
     }
 
     /**
@@ -35,20 +35,15 @@ export class MenuPage extends BasePage {
 
         Logger.info(`Main Menu Count: ${mainMenuCount}`);
 
-        // --------------------------------------------------
         // MAIN MENU
-        // --------------------------------------------------
 
         for (let i = 0; i < mainMenuCount; i++) {
 
             const mainMenuLocator = this.mainMenuLocators.nth(i);
 
-            const mainMenuText =
-                (await mainMenuLocator.textContent())?.trim();
+            const mainMenuText = (await mainMenuLocator.textContent())?.trim();
 
-            Logger.info(
-                `Checking Main Menu Name: ${mainMenuText}`
-            );
+            Logger.info(`Checking Main Menu Name: ${mainMenuText}`);
 
             if (mainMenuText !== expectedMainMenu) {
                 continue;
@@ -59,16 +54,16 @@ export class MenuPage extends BasePage {
             await mainMenuLocator.click();
 
             // Locate Main Menu <li>
-            const mainMenuItem = mainMenuLocator.locator("..");
+            const mainMenuItem = mainMenuLocator.locator("xpath=..");
 
+            /*
             // Locate Sub Menu
-            const subMenuLocators =
-                mainMenuItem.locator(
-                    "ul.dropdown-menu a.dropdown-item"
-                );
+            const subMenuLocators = mainMenuItem.locator("ul.dropdown-menu a.dropdown-item");
+            */
+            // Locate Sub Menu
+            const subMenuLocators = mainMenuItem.locator(":scope > ul.dropdown-menu > li > a.dropdown-item");
 
-            const subMenuCount =
-                await subMenuLocators.count();
+            const subMenuCount = await subMenuLocators.count();
 
             Logger.info(`Sub Menu Count: ${subMenuCount}`);
 
@@ -78,9 +73,7 @@ export class MenuPage extends BasePage {
 
             if (subMenuCount === 0) {
 
-                Logger.info(
-                    `No Sub Menu available. ${mainMenuText} is the final menu.`
-                );
+                Logger.info(`No Sub Menu available. ${mainMenuText} is the final menu.`);
 
                 return;
             }
@@ -91,23 +84,17 @@ export class MenuPage extends BasePage {
 
             for (let j = 0; j < subMenuCount; j++) {
 
-                const subMenuLocator =
-                    subMenuLocators.nth(j);
+                const subMenuLocator = subMenuLocators.nth(j);
 
-                const subMenuText =
-                    (await subMenuLocator.textContent())?.trim();
+                const subMenuText = (await subMenuLocator.textContent())?.trim();
 
-                Logger.info(
-                    `Checking Sub Menu Name: ${subMenuText}`
-                );
+                Logger.info(`Checking Sub Menu Name: ${subMenuText}`);
 
                 if (subMenuText !== expectedSubMenu) {
                     continue;
                 }
 
-                Logger.info(
-                    `Sub Menu Matched: ${subMenuText}`
-                );
+                Logger.info(`Sub Menu Matched: ${subMenuText}`);
 
                 await subMenuLocator.click();
 
@@ -115,56 +102,30 @@ export class MenuPage extends BasePage {
                 // SUB SUB MENU
                 // --------------------------------------------------
 
-                const subMenuItem =
-                    subMenuLocator.locator("..");
+                const subMenuItem = subMenuLocator.locator("xpath=..");
 
-                const subSubMenuLocators =
-                    subMenuItem.locator(
-                        "ul.dropdown-menu li a.dropdown-item"
-                    );
+                const subSubMenuLocators = subMenuItem.locator(":scope > ul.dropdown-menu > li > a.dropdown-item");
 
-                const subSubMenuCount =
-                    await subSubMenuLocators.count();
+                const subSubMenuCount = await subSubMenuLocators.count();
 
-                Logger.info(
-                    `Sub Sub Menu Count: ${subSubMenuCount}`
-                );
+                Logger.info(`Sub Sub Menu Count: ${subSubMenuCount}`);
 
                 // If sub-sub menu is required
-                if (
-                    subSubMenuCount > 0 &&
-                    expectedSubSubMenu !== ""
-                ) {
+                if (subSubMenuCount > 0 && expectedSubSubMenu !== "") {
 
-                    Logger.info(
-                        "Sub Sub Menu is available"
-                    );
+                    Logger.info("Sub Sub Menu is available");
 
-                    for (
-                        let k = 0;
-                        k < subSubMenuCount;
-                        k++
-                    ) {
+                    for (let k = 0; k < subSubMenuCount; k++) {
 
-                        const subSubMenuLocator =
-                            subSubMenuLocators.nth(k);
+                        const subSubMenuLocator = subSubMenuLocators.nth(k);
 
-                        const subSubMenuText =
-                            (await subSubMenuLocator.textContent())
-                            ?.trim();
+                        const subSubMenuText = (await subSubMenuLocator.textContent())?.trim();
 
-                        Logger.info(
-                            `Checking Sub Sub Menu Name: ${subSubMenuText}`
-                        );
+                        Logger.info( `Checking Sub Sub Menu Name: ${subSubMenuText}`);
 
-                        if (
-                            subSubMenuText ===
-                            expectedSubSubMenu
-                        ) {
+                        if ( subSubMenuText === expectedSubSubMenu ) {
 
-                            Logger.info(
-                                `Sub Sub Menu Matched: ${subSubMenuText}`
-                            );
+                            Logger.info( `Sub Sub Menu Matched: ${subSubMenuText}` );
 
                             await subSubMenuLocator.click();
 
@@ -172,27 +133,19 @@ export class MenuPage extends BasePage {
                         }
                     }
 
-                    throw new Error(
-                        `Sub Sub Menu '${expectedSubSubMenu}' not found`
-                    );
+                    throw new Error( `Sub Sub Menu '${expectedSubSubMenu}' not found` );
                 }
 
                 // No Sub Sub Menu required
-                Logger.info(
-                    "No Sub Sub Menu required. Sub Menu is the final menu."
-                );
+                Logger.info( "No Sub Sub Menu required. Sub Menu is the final menu." );
 
                 return;
             }
 
-            throw new Error(
-                `Sub Menu '${expectedSubMenu}' not found`
-            );
+            throw new Error( `Sub Menu '${expectedSubMenu}' not found` );
         }
 
-        throw new Error(
-            `Main Menu '${expectedMainMenu}' not found`
-        );
+        throw new Error( `Main Menu '${expectedMainMenu}' not found` );
     }
 
     /**
@@ -200,12 +153,9 @@ export class MenuPage extends BasePage {
      */
     async verifyPageTitle(expectedTitle: string): Promise<void> {
 
-        Logger.info(
-            `Validating destination page: ${expectedTitle}`
-        );
+        Logger.info( `Validating destination page: ${expectedTitle}`);
 
-        const title =
-            this.page.getByRole("cell", {
+        const title = this.page.getByRole("cell", {
                 name: expectedTitle,
                 exact: true
             });
@@ -214,8 +164,6 @@ export class MenuPage extends BasePage {
 
         await expect(title).toContainText(expectedTitle);
 
-        Logger.info(
-            `Destination page validated successfully`
-        );
+        Logger.info( `Destination page validated successfully` );
     }
 }

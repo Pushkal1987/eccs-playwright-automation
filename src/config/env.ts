@@ -30,4 +30,20 @@ export const env = {
     username: getRequiredEnvironmentVariable('CUSTODIAN_USERNAME'),
     password: getRequiredEnvironmentVariable('CUSTODIAN_PASSWORD'),
   },
+
+  acdc: {
+    username: getRequiredEnvironmentVariable('ACDC_USERNAME'),
+    password: getRequiredEnvironmentVariable('ACDC_PASSWORD'),
+  },
+
+  ao: {
+    username: getRequiredEnvironmentVariable('AO_USERNAME'),
+    password: getRequiredEnvironmentVariable('AO_PASSWORD'),
+  },
+
+  inspector: {
+    username: getRequiredEnvironmentVariable('INSPECTOR_USERNAME'),
+    password: getRequiredEnvironmentVariable('INSPECTOR_PASSWORD'),
+  },
+  
 };

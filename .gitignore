@@ -1,0 +1,26 @@
+
+# Playwright
+node_modules/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+playwright/.auth/
+
+# Authentication / Storage State
+.auth/
+auth/
+playwright/.auth/
+*.auth.json
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Allure
+allure-results/
+allure-report/

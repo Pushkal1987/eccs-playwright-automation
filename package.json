@@ -1,0 +1,32 @@
+{
+  "name": "eccs-playwright-automation",
+  "version": "1.0.0",
+  "description": "Playwright TypeScript automation framework for ECCS application",
+  "scripts": {
+    "test": "npx playwright test",
+    "headed": "npx playwright test --headed",
+    "debug": "npx playwright test --debug",
+    "ui": "npx playwright test --ui",
+    "regression": "npx playwright test",
+    "smoke": "npx playwright test --grep @smoke",
+    "generateAllureReport": "npx allure-commandline generate ./allure-results --clean -o ./allure-report",
+    "openAllureReport": "npx allure-commandline open ./allure-report",
+    "allureReport": "npm run generateAllureReport && npm run openAllureReport"
+  },
+  "keywords": [],
+  "author": "Pushkal R. Shripad",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.1.2",
+    "allure-commandline": "^2.43.0",
+    "allure-playwright": "^3.11.0"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.5.0",
+    "dotenv": "^17.4.2",
+    "winston": "^3.19.0",
+    "xlsx": "^0.18.5"
+  }
+}

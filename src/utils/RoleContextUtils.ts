@@ -3,14 +3,6 @@ import { PageObjectsManager } from "../managers/PageObjectsManager";
 import { UserRole, users } from "../config/users";
 import { Logger } from "./LoggerUtils";
 
-
-/*export type UserRole =
-    | 'COURIER'
-    | 'CUSTODIAN'
-    | 'ACDC'
-    | 'AO'
-    | 'INSPECTOR';
-*/
 export class RoleContext {
 
     readonly role: UserRole;
@@ -29,18 +21,7 @@ export class RoleContext {
         browser: Browser,
         role: UserRole
     ): Promise<RoleContext> {
-        /*
-        const storageStates: Record<UserRole, string> = {
-
-            COURIER: '.auth/courier.json',
-            CUSTODIAN: '.auth/custodian.json',
-            ACDC: '.auth/acdc.json',
-            AO: '.auth/ao.json',
-            INSPECTOR: '.auth/inspector.json'
-        };
-
-        const storageState = storageStates[role];
-        */
+        
        const user = users[role];
 
         Logger.info('==========================================');

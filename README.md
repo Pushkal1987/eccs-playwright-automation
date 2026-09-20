@@ -1,22 +1,56 @@
 # ECCS Playwright Automation
 
-Playwright TypeScript automation framework for the ECCS application.
+[![Playwright Tests](https://github.com/Pushkal1987/eccs-playwright-automation/actions/workflows/playwright.yml/badge.svg)](https://github.com/Pushkal1987/eccs-playwright-automation/actions/workflows/playwright.yml)
+[![License: ISC](https://img.shields.io/badge/license-ISC-blue.svg)](https://opensource.org/licenses/ISC)
+[![Built with TypeScript](https://img.shields.io/badge/built%20with-TypeScript-3178C6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-This project is designed to automate end-to-end browser flows for different ECCS user roles, including Courier, Custodian, ACDC, AO, and Inspector. It uses Playwright's TypeScript support with environment-based configuration, role-specific authentication, and rich reporting via HTML and Allure.
+A maintainable Playwright and TypeScript end-to-end automation framework for the ECCS application.
 
-## Features
+This project automates key business flows for ECCS users across multiple roles, including Courier, Custodian, ACDC, AO, and Inspector. It is structured for readability, maintainability, and CI-friendly execution with reusable page objects, fixtures, managers, and role-based authentication.
 
-- Playwright + TypeScript setup for browser automation
-- Role-based test projects for multiple ECCS users
-- Centralized environment configuration via `.env`
-- Authentication state management using Playwright storage state
-- HTML reporting and Allure integration
-- Support for smoke and regression execution patterns
+## Contents
 
-## Project Structure
+- [Highlights](#highlights)
+- [Technology stack](#technology-stack)
+- [Project structure](#project-structure)
+- [Getting started](#getting-started)
+- [Environment configuration](#environment-configuration)
+- [Running tests](#running-tests)
+- [Reports and debugging](#reports-and-debugging)
+- [CI](#ci)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Highlights
+
+- TypeScript-based Playwright automation framework
+- Role-specific projects with setup dependencies
+- Reusable page-object model and workflow managers
+- Centralized `.env` configuration and validation
+- Secure auth-state handling with Playwright storageState
+- HTML and Allure reporting for diagnostics and traceability
+- Smoke test support with the `@smoke` tag
+- Automated browser execution with failure capture for screenshots, traces, and videos
+
+## Technology stack
+
+- Playwright Test
+- TypeScript
+- Node.js + npm
+- Allure via `allure-playwright`
+- dotenv, Faker, Winston, and XLSX
+
+## Project structure
+
+Detailed architecture guidance is available in [`docs/PROJECT-STRUCTURE.md`](docs/PROJECT-STRUCTURE.md).
 
 ```text
 .
+├── .github/
+│   └── workflows/
+│       └── playwright.yml
+├── docs/
+│   └── PROJECT-STRUCTURE.md
 ├── src/
 │   ├── config/
 │   │   └── env.ts
@@ -28,36 +62,36 @@ This project is designed to automate end-to-end browser flows for different ECCS
 │   ├── test-data/
 │   ├── tests/
 │   └── utils/
-├── tests/
-│   └── example.spec.ts
-├── .gitignore
-├── package.json
-├── package-lock.json
 ├── playwright.config.ts
+├── package.json
 ├── tsconfig.json
-└── README.md
+├── .gitignore
+├── README.md
+└── package-lock.json
 ```
 
-## Prerequisites
+## Getting started
 
-Before running this project, make sure you have the following installed:
+### Prerequisites
 
-- Node.js 18+
+- Node.js 18 or newer
 - npm
-- A browser supported by Playwright (Chromium is configured by default)
+- Chromium browser support via Playwright
+- Access to the ECCS application and valid test credentials
 
-## Installation
+### Install dependencies
 
 ```bash
-npm install
+npm ci
+npx playwright install --with-deps chromium
 ```
 
-## Environment Configuration
+## Environment configuration
 
-Create a `.env` file in the project root and add the required ECCS variables:
+Create a `.env` file in the project root with the required ECCS settings:
 
 ```env
-BASE_URL=https://your-eccs-url
+BASE_URL=https://your-eccs-environment.example.com
 
 COURIER_USERNAME=your_courier_username
 COURIER_PASSWORD=your_courier_password
@@ -75,46 +109,49 @@ INSPECTOR_USERNAME=your_inspector_username
 INSPECTOR_PASSWORD=your_inspector_password
 ```
 
-Note: The project is configured to fail immediately if required environment variables are missing.
+The project validates required environment variables at startup and fails early if any are missing.
 
-## Running Tests
-
-Run the full suite:
+## Running tests
 
 ```bash
+# Full suite
 npm test
-```
 
-Run in headed mode:
+# Explicit regression command
+npm run regression
 
-```bash
+# Run with visible browser
 npm run headed
-```
 
-Run in debug mode:
-
-```bash
+# Launch in debug mode
 npm run debug
-```
 
-Open Playwright Test UI:
-
-```bash
+# Open Playwright UI mode
 npm run ui
-```
 
-Run smoke tests only:
-
-```bash
+# Run smoke tests only
 npm run smoke
 ```
 
-## Reports
+This project is configured around Playwright projects such as:
 
-This project is configured to generate the following reports:
+- `setup`
+- `courier`
+- `custodian`
+- `acdc`
+- `ao`
+- `inspector`
+- `BusinessFlow`
+- `Chromium`
 
-- HTML report in `playwright-report/`
-- Allure report via `allure-results/` and `allure-report/`
+## Reports and debugging
+
+The framework produces:
+
+- Playwright HTML report in `playwright-report/`
+- Allure results in `allure-results/`
+- Allure report in `allure-report/`
+- Screenshots, traces, and videos for failed executions
 
 Generate and open the Allure report:
 
@@ -122,31 +159,39 @@ Generate and open the Allure report:
 npm run allureReport
 ```
 
-Open the generated Allure report manually:
+Open Playwright's report viewer:
 
 ```bash
-npm run openAllureReport
+npx playwright show-report
 ```
 
-## Test Configuration Highlights
+## CI
 
-The Playwright config includes:
+This repository includes a GitHub Actions workflow in `.github/workflows/playwright.yml` that runs the Playwright suite on push, pull_request, and manual dispatch.
 
-- `testDir: ./src/tests`
-- Role-specific projects for authentication-based flows
-- Browser setup using `Desktop Chrome`
-- Screenshots and traces captured on failure
-- HTML and Allure report generation
+Before enabling the workflow in GitHub, add these repository secrets:
 
-## Notes
+- `BASE_URL`
+- `COURIER_USERNAME`, `COURIER_PASSWORD`
+- `CUSTODIAN_USERNAME`, `CUSTODIAN_PASSWORD`
+- `ACDC_USERNAME`, `ACDC_PASSWORD`
+- `AO_USERNAME`, `AO_PASSWORD`
+- `INSPECTOR_USERNAME`, `INSPECTOR_PASSWORD`
 
-- Tests are organized by business role and flow patterns.
-- Authentication state is stored per role under `.auth/` during setup.
-- The project is intended for QA automation and regression coverage for ECCS user workflows.
+The workflow uploads Playwright report artifacts, test results, and Allure results even when tests fail.
+
+## Contributing
+
+1. Create a feature branch for your changes.
+2. Keep test selectors and UI interactions within page objects.
+3. Use managers for multi-step business flows.
+4. Add or update tests whenever application behavior changes.
+5. Run the relevant suite locally before opening a pull request.
+6. Never commit credentials, generated reports, or auth state artifacts.
 
 ## License
 
-This project uses the ISC license as defined in `package.json`.
+This project uses the ISC license. See [`package.json`](package.json) for package metadata.
 
 ## Author
 

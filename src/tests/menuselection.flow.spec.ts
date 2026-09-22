@@ -1,13 +1,17 @@
 import { test, expect } from "@playwright/test"
 import { RoleContext } from "../utils/RoleContextUtils";
 import Logger from "../utils/LoggerUtils";
+import { log, meta, testData } from "reporting-labs";
 
 
 test("test the menu selection", async ({ browser }) => {
 
+    meta({priority: 'P1', severity: 'critical', owner: 'Pushkal Shripad', story: 'US101', epic: '102', feature: 'Login Test', issue: 'Bug-901'});
+
+    await testData({username: 'Courier_user', password: 'Abc@123'}, 'Login');
     Logger.info("==================================================");
     Logger.info("MENU SELECTION TEST STARTED");
-
+    await log('MENU SELECTION TEST STARTED');
     const courier: RoleContext = await RoleContext.create(browser, 'COURIER');
     //const custodian: RoleContext = await RoleContext.create(browser, 'CUSTODIAN');
 

@@ -19,7 +19,6 @@ test.describe("Menu Selection Test", () => {
     Logger.info("MENU SELECTION TEST STARTED");
     //const custodian: RoleContext = await RoleContext.create(browser, 'CUSTODIAN');
 
-    try {
         Logger.info("========== COURIER FLOW STARTED ==========");
 
         Logger.info("Navigating Courier to ECCS application");
@@ -29,7 +28,6 @@ test.describe("Menu Selection Test", () => {
         await expect(courier.page).toHaveTitle('Express Cargo Clearance System');
 
         Logger.success("Courier successfully opened ECCS application");
->>>>>>> 03de158e3d7e8e943e55883604987297be5dfe34
 
         const courierMenu = courier.pageObjectsManager.getMenuPage();
 

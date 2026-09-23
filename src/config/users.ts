@@ -18,7 +18,7 @@ export interface UserConfig {
 }
 
 // All authentication file paths are created in one common directory.
-const authDirectory = path.resolve('.auth');
+const authDirectory = path.resolve('auth');
 
 // Each role has different credentials and a different storageState file.
 export const users: Record<UserRole, UserConfig> = {

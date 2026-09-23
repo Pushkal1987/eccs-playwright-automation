@@ -5,12 +5,11 @@ test-results/
 playwright-report/
 blob-report/
 playwright/.cache/
-playwright/.auth/
+playwright/auth/
 
 # Authentication / Storage State
-.auth/
 auth/
-playwright/.auth/
+playwright/auth/
 *.auth.json
 
 # Environment

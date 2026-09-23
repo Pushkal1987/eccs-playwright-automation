@@ -1,4 +1,4 @@
-import { Page, test as setup, expect } from '@playwright/test'; //'../fixtures/BaseTest';
+import { Page, test as setup, expect } from '@playwright/test';
 
 import { PageObjectsManager } from '../managers/PageObjectsManager';
 import { users, UserRole } from '../config/users';
@@ -78,76 +78,7 @@ setup(
 
         await authenticateUser(
             page,
-            'custodian'
+            'CUSTODIAN'
         );
     }
-);
-
-/*
-// ACDC
-setup(
-    'ACDC Login',
-    async ({ page }) => {
-
-        setup.setTimeout(AUTH_TIMEOUT);
-
-        await authenticateUser(
-            page,
-            'acdc'
-        );
-    }
-);
-
-// Appraiser
-setup(
-    'AO Login',
-    async ({ page }) => {
-
-        setup.setTimeout(AUTH_TIMEOUT);
-
-        await authenticateUser(
-            page,
-            process.env.AO_USERNAME!,
-            process.env.AO_PASSWORD!,
-            'AO',
-            AUTH_FILES.ao
-        );
-    }
-);
-
-// INSPECTOR
-setup(
-    'Inspector Login',
-    async ({ page }) => {
-
-        setup.setTimeout(AUTH_TIMEOUT);
-
-        await authenticateUser(
-            page,
-            process.env.INSPECTOR_USERNAME!,
-            process.env.INSPECTOR_PASSWORD!,
-            'INSPECTOR',
-            AUTH_FILES.inspector
-        );
-    }
-);
-*/
-
-
-
-/*
-if (!process.env.COURIER_USERNAME) {
-    throw new Error(
-        'COURIER_USERNAME is not loaded. Please check the .env file location and variable name.'
-    );
-}
-
-if (!process.env.COURIER_PASSWORD) {
-    throw new Error(
-        'COURIER_PASSWORD is not loaded. Please check the .env file location and variable name.'
-    );
-}
-
-const courierAuthFile = 'auth/user.json';
-*/
-
+);*/

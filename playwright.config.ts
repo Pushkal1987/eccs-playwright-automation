@@ -60,7 +60,7 @@ export default defineConfig({
       testMatch: match,
       use: {
         ...devices['Desktop Chrome'],
-        storageState: `.auth/${name}.json`,
+        storageState: `auth/${name}.json`,
       },
     })),
     {

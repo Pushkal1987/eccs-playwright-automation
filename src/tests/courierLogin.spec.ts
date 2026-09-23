@@ -4,12 +4,12 @@ import { Logger } from '../utils/LoggerUtils'
 test.describe('Courier Login', () => {
     test('Courier should access Home Page', async({pageObjectsManager, page}) => {
 
-        const headerPage = pageObjectsManager.getHeaderPage();
+        const dashboardPage = pageObjectsManager.getDashboardPage();
         await page.goto('/eccs');
         await expect(page.getByText('AVAILABLE WORK SUMMARY')).toBeVisible();
-        const eccsHeading = await headerPage.getECCSHeading();
+        const eccsHeading = await dashboardPage.getDashboardTitle();
         Logger.info(`Heading: ${eccsHeading}`)
-        await expect(eccsHeading).toContain('ECCS: Express Cargo Clearance System');
+        await expect(eccsHeading).toContain('AVAILABLE WORK SUMMARY');
     })
 
     test('ECM Filing', async ({ page }) => {

@@ -54,7 +54,6 @@ export class MenuPage extends BasePage {
         if (!subSubMenu) {
             throw new Error(`Sub Sub Menu '${expectedSubSubMenu}' not found`);
         }
-
         await subSubMenu.click();
     }
 

@@ -1,7 +1,9 @@
 import { test, expect } from "@playwright/test"
 import { RoleContext } from "../utils/RoleContextUtils";
 import Logger from "../utils/LoggerUtils";
+
 import { MenuSelectionData } from "../test-data/MenuSelectionData";
+
 
 test.describe("Menu Selection Test", () => {
 
@@ -12,6 +14,22 @@ test.describe("Menu Selection Test", () => {
 
         const courier: RoleContext = await RoleContext.create(browser, 'COURIER');
         //const custodian: RoleContext = await RoleContext.create(browser, 'CUSTODIAN');
+
+    Logger.info("==================================================");
+    Logger.info("MENU SELECTION TEST STARTED");
+    //const custodian: RoleContext = await RoleContext.create(browser, 'CUSTODIAN');
+
+    try {
+        Logger.info("========== COURIER FLOW STARTED ==========");
+
+        Logger.info("Navigating Courier to ECCS application");
+        await courier.page.goto('/eccs');
+
+        Logger.info("Validating Courier page title");
+        await expect(courier.page).toHaveTitle('Express Cargo Clearance System');
+
+        Logger.success("Courier successfully opened ECCS application");
+>>>>>>> 03de158e3d7e8e943e55883604987297be5dfe34
 
         const courierMenu = courier.pageObjectsManager.getMenuPage();
 

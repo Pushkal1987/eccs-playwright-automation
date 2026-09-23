@@ -1,6 +1,7 @@
 import * as os from 'node:os';
 import { defineConfig, devices } from '@playwright/test';
 import { env } from './src/config/env';
+import reportingLabs from './reporting-labs.config';
 
 const roleProjects = [
   { name: 'courier', match: /courier.*\.spec\.ts/ },
@@ -37,6 +38,7 @@ export default defineConfig({
         Base_URL: process.env.BASE_URL,
       },
     }],
+    ['reporting-labs', reportingLabs]
   ],
 
   use: {

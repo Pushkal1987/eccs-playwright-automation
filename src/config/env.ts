@@ -43,4 +43,9 @@ export const env = {
     username: getRequiredEnvironmentVariable('INSPECTOR_USERNAME'),
     password: getRequiredEnvironmentVariable('INSPECTOR_PASSWORD'),
   },
+
+  superintendent: {
+    username: getRequiredEnvironmentVariable('SUPERINTENDENT_USERNAME'),
+    password: getRequiredEnvironmentVariable('SUPERINTENDENT_PASSWORD'),
+  },  
 } as const;

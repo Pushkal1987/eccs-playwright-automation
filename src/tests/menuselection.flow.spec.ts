@@ -1,90 +1,51 @@
-import { test, expect } from "@playwright/test"
-import { RoleContext } from "../utils/RoleContextUtils";
+import { test, expect } from '../fixtures/auth.fixture';
 import Logger from "../utils/LoggerUtils";
-
 import { MenuSelectionData } from "../test-data/MenuSelectionData";
 
+test.describe("@smoke Menu Selection Test", () => {
 
-test.describe("Menu Selection Test", () => {
-
-    test("test the menu selection", async ({ browser }) => {
+    test("test the menu selection", async ({ userLogin }) => {
+        const userRole = 'COURIER';
+        const pageObjectsManager = await userLogin(userRole);
+        const courierPage = pageObjectsManager.getPage();
+        //const menuPage = pageObjectsManager.getMenuPage();
+        const homePage = pageObjectsManager.getHomePage();
 
         Logger.info("==================================================");
         Logger.info("========== MENU SELECTION TEST STARTED ==========");
-
-        const courier: RoleContext = await RoleContext.create(browser, 'COURIER');
-        //const custodian: RoleContext = await RoleContext.create(browser, 'CUSTODIAN');
-
-    Logger.info("==================================================");
-    Logger.info("MENU SELECTION TEST STARTED");
-    //const custodian: RoleContext = await RoleContext.create(browser, 'CUSTODIAN');
-
-        Logger.info("========== COURIER FLOW STARTED ==========");
-
-        Logger.info("Navigating Courier to ECCS application");
-        await courier.page.goto('/eccs');
-
-        Logger.info("Validating Courier page title");
-        await expect(courier.page).toHaveTitle('Express Cargo Clearance System');
-
-        Logger.success("Courier successfully opened ECCS application");
-
-        const courierMenu = courier.pageObjectsManager.getMenuPage();
 
         const expectedMainMenu = MenuSelectionData.expectedMainMenu;
         const expectedSubMenu = MenuSelectionData.expectedSubMenu;
         const expectedSubSubMenu = MenuSelectionData.expectedSubSubMenu;
         const expectedTitle = MenuSelectionData.expectedTitle;
 
-        try {
-            Logger.info("========== COURIER FLOW STARTED ==========");
+            Logger.info(`Navigating ${userRole} to ECCS application`);
+            await courierPage.goto('/eccs');
 
-            await test.step("Navigate Courier to ECCS application", async () => {
-                Logger.info("Navigating Courier to ECCS application");
-                await courier.page.goto('/eccs');
-            });
-
-            await test.step("Validate Courier page title", async () => {
-                Logger.info("Validating Courier page title");
-                await expect(courier.page).toHaveTitle('Express Cargo Clearance System');
-                Logger.success("Courier successfully opened ECCS application");
-            });
-
-            await test.step(`Select menu: ${expectedMainMenu} > ${expectedSubMenu} > ${expectedSubSubMenu}`, async () => {
-                Logger.info(`Selecting Courier menu: ${expectedMainMenu} > ${expectedSubMenu} > ${expectedSubSubMenu}`);
-                await courierMenu.selectMenu(expectedMainMenu, expectedSubMenu, expectedSubSubMenu);
-                Logger.success(`Menu selected successfully: ${expectedMainMenu} > ${expectedSubMenu} > ${expectedSubSubMenu}`);
-            }
-            );
-
-            await test.step(`Validate destination page title: ${expectedTitle}`, async () => {
-                Logger.info(`Validating Courier destination page title: ${expectedTitle}`);
-                await courierMenu.verifyPageTitle(expectedTitle);
-                Logger.success(`Destination page validated successfully: ${expectedTitle}`);
-            }
-            );
-
-            Logger.success("========== COURIER FLOW COMPLETED ==========");
-
-            //Logger.info("========== CUSTODIAN FLOW STARTED ==========");
-            // Write custodian flow here
-
-        } finally {
-
-            await test.step("Closing role contexts", async () => {
-                Logger.info("Closing Courier role context");
-                await courier.context.close();
-            });
-
+            Logger.info(`Validating Homepage is loaded for ${userRole}`);
+            expect(await homePage.getLogoutButton()).toBeVisible();
+            Logger.success(`${userRole} successfully opened ECCS application`);
+       
             /*
-            await test.step("Closing role contexts", async () => {
-            Logger.info("Closing Custodian role context");  
-            await custodian.context.close();
-            });
+            Logger.info(`Validating ${userRole} page title`);
+            await expect(await homePage.getLoggedInUser()).toContain(`${userRole}`);
+            Logger.success(`${userRole} successfully logged in as ${await homePage.getLoggedInUser()}`);
             */
 
-            Logger.info("========== MENU SELECTION TEST COMPLETED ==========");
-            Logger.info("==================================================");
-        }
+            await expect(courierPage).toHaveTitle('Express Cargo Clearance System');
+            Logger.success(`Title validated successfully for ${userRole}: ${await courierPage.title()}`);
+      
+            Logger.info(`Selecting ${userRole} menu: ${expectedMainMenu} > ${expectedSubMenu} > ${expectedSubSubMenu}`);
+            await homePage.selectMenu(expectedMainMenu, expectedSubMenu, expectedSubSubMenu);
+            Logger.success(`Menu selected successfully: ${expectedMainMenu} > ${expectedSubMenu} > ${expectedSubSubMenu}`);
+
+            Logger.info(`Validating ${userRole} destination page title: ${expectedTitle}`);
+            await homePage.verifyPageTitle(expectedTitle);
+            Logger.success(`Destination page validated successfully: ${expectedTitle}`);
+
+        Logger.success(`========== ${userRole} FLOW COMPLETED ==========`);
+        
+        Logger.info("========== MENU SELECTION TEST COMPLETED ==========");
+        Logger.info("==================================================");
     });
-})
+});

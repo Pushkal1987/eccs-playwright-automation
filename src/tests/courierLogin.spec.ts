@@ -1,27 +1,26 @@
-import {test, expect} from '../fixtures/BaseTest';
-import { Logger } from '../utils/LoggerUtils'
+import { test, expect } from '../fixtures/auth.fixture';
 
 test.describe('Courier Login', () => {
-    test('Courier should access Home Page', async({pageObjectsManager, page}) => {
+    test('Courier should access Home Page', async ({ userLogin }) => {
+        const pageObjectsManager = await userLogin('COURIER');
+        const courierPage = pageObjectsManager.getPage();
 
-        const dashboardPage = pageObjectsManager.getDashboardPage();
-        await page.goto('/eccs');
-        await expect(page.getByText('AVAILABLE WORK SUMMARY')).toBeVisible();
-        const eccsHeading = await dashboardPage.getDashboardTitle();
-        Logger.info(`Heading: ${eccsHeading}`)
-        await expect(eccsHeading).toContain('AVAILABLE WORK SUMMARY');
-    })
+        await courierPage.goto('/eccs');
+        await expect(courierPage.getByText('AVAILABLE WORK SUMMARY')).toBeVisible();
+    });
 
-    test('ECM Filing', async ({ page }) => {
-        await page.goto('/eccs');
-        const importMenu = page.getByRole('link', { name: 'IMPORT' });
+    test('ECM Filing', async ({ userLogin }) => {
+        const pageObjectsManager = await userLogin('COURIER');
+        const courierPage = pageObjectsManager.getPage();
+        await courierPage.goto('/eccs');
+        const importMenu = courierPage.getByRole('link', { name: 'IMPORT' });
         await importMenu.click();
-        const manualFiling = page.getByRole('link', { name: 'Manual Filing +' });
+        const manualFiling = courierPage.getByRole('link', { name: 'Manual Filing +' });
         await manualFiling.click();
-        const fileECMDocs =  page.getByRole('link', { name: 'File ECM - Documents' });
+        const fileECMDocs = courierPage.getByRole('link', { name: 'File ECM - Documents' });
         await fileECMDocs.click();
-        const ecmHeading = await page.getByRole('cell', { name: 'Express Cargo Manifest (ECM)' }).textContent();
+        const ecmHeading = await courierPage.getByRole('cell', { name: 'Express Cargo Manifest (ECM)' }).textContent();
         expect(ecmHeading).toBe('Express Cargo Manifest (ECM) Filing - Document ');
-        await page.getByRole('link', {name: 'Fresh ECM'}).click();
+        await courierPage.getByRole('link', { name: 'Fresh ECM' }).click();
     });
 })

@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from '@playwright/test';
+/*import { expect, Locator, Page } from '@playwright/test';
 import Logger from '../utils/LoggerUtils';
 import { BasePage } from './BasePage';
 
@@ -102,3 +102,4 @@ export class MenuPage extends BasePage {
         Logger.info('Destination page validated successfully');
     }
 }
+*/

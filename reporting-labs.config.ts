@@ -1,4 +1,3 @@
-import 'reporting-labs/auto';   // records every request.* / page.request call in the report (remove to switch off)
 import type { ReportingLabsOptions } from 'reporting-labs';
 
 // reportingLabs configuration.
@@ -11,8 +10,8 @@ import type { ReportingLabsOptions } from 'reporting-labs';
 const config: ReportingLabsOptions = {
 
   // ── Look ─────────────────────────────────────────────────────────────────────
-  title: 'My app – regression',                       // shown in the header
-  // logo: 'logo.png',                               // your logo next to the title: a file next to this config (embedded), or an https URL
+  title: 'ECCS Application',                       // shown in the header
+  logo: 'eccs-logo.png',                               // your logo next to the title: a file next to this config (embedded), or an https URL
   // palette: 'lab',                                  // 'lab' (blue, default) | 'ocean' | 'ember' | 'mono'; viewers can switch
   // accent: '#7C3AED',                               // your brand color instead of the palette accent
   // theme: 'auto',                                   // 'auto' (follows OS, default) | 'light' | 'dark'

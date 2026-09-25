@@ -1,0 +1,520 @@
+[
+ {
+  "time": 1790243121491,
+  "duration": 183328.40099999998,
+  "passed": 3,
+  "failed": 0,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 3,
+  "tests": {
+   "setup::src/tests/auth.setup.ts::Courier Login": [
+    "p",
+    30058
+   ],
+   "setup::src/tests/auth.setup.ts::SUPERINTENDENT Login": [
+    "p",
+    123399
+   ],
+   "BusinessFlow::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "p",
+    19412
+   ]
+  }
+ },
+ {
+  "time": 1790243569605,
+  "duration": 118752.233,
+  "passed": 3,
+  "failed": 0,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 3,
+  "tests": {
+   "setup::src/tests/auth.setup.ts::Courier Login": [
+    "p",
+    34790
+   ],
+   "setup::src/tests/auth.setup.ts::SUPERINTENDENT Login": [
+    "p",
+    50105
+   ],
+   "BusinessFlow::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "p",
+    18675
+   ]
+  }
+ },
+ {
+  "time": 1790245989258,
+  "duration": 111794.36700000001,
+  "passed": 1,
+  "failed": 1,
+  "flaky": 0,
+  "skipped": 1,
+  "total": 3,
+  "tests": {
+   "setup::src/tests/auth.setup.ts::Courier Login": [
+    "p",
+    37191
+   ],
+   "setup::src/tests/auth.setup.ts::SUPERINTENDENT Login": [
+    "f",
+    67313
+   ],
+   "BusinessFlow::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "s",
+    0
+   ]
+  }
+ },
+ {
+  "time": 1790251793874,
+  "duration": 13012.126,
+  "passed": 0,
+  "failed": 2,
+  "flaky": 0,
+  "skipped": 1,
+  "total": 3,
+  "tests": {
+   "setup::src/tests/auth.setup.ts::Courier Login": [
+    "f",
+    2046
+   ],
+   "setup::src/tests/auth.setup.ts::SUPERINTENDENT Login": [
+    "f",
+    2323
+   ],
+   "BusinessFlow::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "s",
+    0
+   ]
+  }
+ },
+ {
+  "time": 1790251944503,
+  "duration": 43179.6,
+  "passed": 1,
+  "failed": 1,
+  "flaky": 0,
+  "skipped": 1,
+  "total": 3,
+  "tests": {
+   "setup::src/tests/auth.setup.ts::Courier Login": [
+    "p",
+    27613
+   ],
+   "setup::src/tests/auth.setup.ts::SUPERINTENDENT Login": [
+    "f",
+    9192
+   ],
+   "BusinessFlow::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "s",
+    0
+   ]
+  }
+ },
+ {
+  "time": 1790252197402,
+  "duration": 22792.028000000002,
+  "passed": 1,
+  "failed": 0,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "BusinessFlow::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "p",
+    8720
+   ]
+  }
+ },
+ {
+  "time": 1790328932217,
+  "duration": 66685.203,
+  "passed": 0,
+  "failed": 2,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 2,
+  "tests": {
+   "chromium::src/tests/courierLogin.spec.ts::Courier Login › Courier should access Home Page": [
+    "f",
+    30014
+   ],
+   "chromium::src/tests/courierLogin.spec.ts::Courier Login › ECM Filing": [
+    "f",
+    18801
+   ]
+  }
+ },
+ {
+  "time": 1790329555875,
+  "duration": 57077.465000000004,
+  "passed": 0,
+  "failed": 2,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 2,
+  "tests": {
+   "chromium::src/tests/courierLogin.spec.ts::Courier Login › Courier should access Home Page": [
+    "f",
+    30152
+   ],
+   "chromium::src/tests/courierLogin.spec.ts::Courier Login › ECM Filing": [
+    "f",
+    16902
+   ]
+  }
+ },
+ {
+  "time": 1790331979160,
+  "duration": 17398.343,
+  "passed": 0,
+  "failed": 1,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselectionFlow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "f",
+    10961
+   ]
+  }
+ },
+ {
+  "time": 1790342666676,
+  "duration": 21026.145,
+  "passed": 0,
+  "failed": 1,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselectionFlow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "f",
+    13824
+   ]
+  }
+ },
+ {
+  "time": 1790342709461,
+  "duration": 25852.605,
+  "passed": 0,
+  "failed": 1,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselectionFlow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "f",
+    12399
+   ]
+  }
+ },
+ {
+  "time": 1790343612211,
+  "duration": 490.89099999999985,
+  "passed": 0,
+  "failed": 0,
+  "flaky": 0,
+  "skipped": 4,
+  "total": 4,
+  "tests": {
+   "chromium::src/tests/courierLogin.spec.ts::Courier Login › Courier should access Home Page": [
+    "s",
+    0
+   ],
+   "chromium::src/tests/courierLogin.spec.ts::Courier Login › ECM Filing": [
+    "s",
+    0
+   ],
+   "chromium::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "s",
+    0
+   ],
+   "chromium::src/tests/menuselectionFlow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "s",
+    0
+   ]
+  }
+ },
+ {
+  "time": 1790343646875,
+  "duration": 378.227,
+  "passed": 0,
+  "failed": 0,
+  "flaky": 0,
+  "skipped": 3,
+  "total": 3,
+  "tests": {
+   "chromium::src/tests/courierLogin.spec.ts::Courier Login › Courier should access Home Page": [
+    "s",
+    0
+   ],
+   "chromium::src/tests/courierLogin.spec.ts::Courier Login › ECM Filing": [
+    "s",
+    0
+   ],
+   "chromium::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "s",
+    0
+   ]
+  }
+ },
+ {
+  "time": 1790343766266,
+  "duration": 37507.202999999994,
+  "passed": 0,
+  "failed": 1,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "f",
+    30105
+   ]
+  }
+ },
+ {
+  "time": 1790344470851,
+  "duration": 305814.46499999997,
+  "passed": 0,
+  "failed": 1,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "f",
+    300008
+   ]
+  }
+ },
+ {
+  "time": 1790344855818,
+  "duration": 36730.064,
+  "passed": 1,
+  "failed": 0,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "p",
+    29622
+   ]
+  }
+ },
+ {
+  "time": 1790344921787,
+  "duration": 16418.810999999998,
+  "passed": 1,
+  "failed": 0,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "p",
+    10081
+   ]
+  }
+ },
+ {
+  "time": 1790345422515,
+  "duration": 249005.85199999998,
+  "passed": 0,
+  "failed": 1,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "f",
+    235234
+   ]
+  }
+ },
+ {
+  "time": 1790346078640,
+  "duration": 34389.01,
+  "passed": 0,
+  "failed": 1,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "f",
+    26991
+   ]
+  }
+ },
+ {
+  "time": 1790346444922,
+  "duration": 21551.215,
+  "passed": 0,
+  "failed": 1,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "f",
+    17689
+   ]
+  }
+ },
+ {
+  "time": 1790346518738,
+  "duration": 21500.4,
+  "passed": 0,
+  "failed": 1,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "f",
+    17647
+   ]
+  }
+ },
+ {
+  "time": 1790346875449,
+  "duration": 45938.105,
+  "passed": 0,
+  "failed": 1,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "f",
+    39373
+   ]
+  }
+ },
+ {
+  "time": 1790348553196,
+  "duration": 60003.513,
+  "passed": 1,
+  "failed": 0,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "p",
+    50508
+   ]
+  }
+ },
+ {
+  "time": 1790348639660,
+  "duration": 17249.025,
+  "passed": 1,
+  "failed": 0,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "p",
+    12093
+   ]
+  }
+ },
+ {
+  "time": 1790348725575,
+  "duration": 17679.476000000002,
+  "passed": 1,
+  "failed": 0,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "p",
+    12501
+   ]
+  }
+ },
+ {
+  "time": 1790348801596,
+  "duration": 19179.582,
+  "passed": 1,
+  "failed": 0,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "p",
+    13349
+   ]
+  }
+ },
+ {
+  "time": 1790352277580,
+  "duration": 47696.307,
+  "passed": 1,
+  "failed": 0,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "p",
+    41156
+   ]
+  }
+ },
+ {
+  "time": 1790352766600,
+  "duration": 21863.198,
+  "passed": 1,
+  "failed": 0,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "p",
+    19020
+   ]
+  }
+ },
+ {
+  "time": 1790353075814,
+  "duration": 19948.641,
+  "passed": 1,
+  "failed": 0,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "p",
+    15867
+   ]
+  }
+ },
+ {
+  "time": 1790353147374,
+  "duration": 45545.449,
+  "passed": 1,
+  "failed": 0,
+  "flaky": 0,
+  "skipped": 0,
+  "total": 1,
+  "tests": {
+   "chromium::src/tests/menuselection.flow.spec.ts::@smoke Menu Selection Test › test the menu selection": [
+    "p",
+    40012
+   ]
+  }
+ }
+]

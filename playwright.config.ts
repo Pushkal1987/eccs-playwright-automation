@@ -2,14 +2,16 @@ import * as os from 'node:os';
 import { defineConfig, devices } from '@playwright/test';
 import { env } from './src/config/env';
 import reportingLabs from './reporting-labs.config';
-
+/*
 const roleProjects = [
   { name: 'courier', match: /courier.*\.spec\.ts/ },
   { name: 'custodian', match: /.*\.custodian\.spec\.ts/ },
   { name: 'acdc', match: /.*\.acdc\.spec\.ts/ },
   { name: 'ao', match: /.*\.ao\.spec\.ts/ },
   { name: 'inspector', match: /.*\.inspector\.spec\.ts/ },
+  { name: 'superintendent', match: /.*\.superintendent\.spec\.ts/ },
 ] as const;
+*/
 
 export default defineConfig({
   testDir: './src/tests',
@@ -53,6 +55,15 @@ export default defineConfig({
 
   projects: [
     {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+    }
+
+  ]
+
+  /*
+  projects: [
+    {
       name: 'setup',
       testMatch: /.*\.setup\.ts/,
     },
@@ -68,9 +79,10 @@ export default defineConfig({
     {
       name: 'BusinessFlow',
       dependencies: ['setup'],
-      testMatch: /.*\.flow\.spec\.ts/,
+      testMatch: /.*\.(flow)\.spec\.ts/,
       use: {
         ...devices['Desktop Chrome'],
+        storageState: 'auth/courier.json',
       },
     },
     {
@@ -83,10 +95,12 @@ export default defineConfig({
         /.*\.acdc\.spec\.ts/,
         /.*\.ao\.spec\.ts/,
         /.*\.inspector\.spec\.ts/,
+        /.*\.(flow|smoke)\.spec\.ts/,
       ],
       use: {
         ...devices['Desktop Chrome'],
       },
     },
   ],
+  */
 });

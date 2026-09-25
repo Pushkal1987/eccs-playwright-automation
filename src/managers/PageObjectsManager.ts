@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 
 import { BasePage } from '../pages/BasePage';
-import { DashboardPage } from '../pages/DashBoardPage';
+import { HomePage } from '../pages/HomePage';
 import { LoginPage } from '../pages/LoginPage';
 import { MenuPage } from '../pages/MenuPage';
 
@@ -11,10 +11,13 @@ export class PageObjectsManager {
   private basePage?: BasePage;
   private loginPage?: LoginPage;
   private menuPage?: MenuPage;
-  private dashboardPage?: DashboardPage;
+  private homePage?: HomePage;
 
   constructor(page: Page) {
     this.page = page;
+  }
+  getPage(): Page {
+    return this.page;
   }
 
   getBasePage(): BasePage {
@@ -38,10 +41,10 @@ export class PageObjectsManager {
     return this.menuPage;
   }
 
-  getDashboardPage(): DashboardPage {
-    if (!this.dashboardPage) {
-      this.dashboardPage = new DashboardPage(this.page);
+  getHomePage(): HomePage {
+    if (!this.homePage) {
+      this.homePage = new HomePage(this.page);
     }
-    return this.dashboardPage;
+    return this.homePage;
   }
 }

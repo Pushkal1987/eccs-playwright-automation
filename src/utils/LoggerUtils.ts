@@ -1,5 +1,6 @@
 import winston from "winston"; 
 import Transport from "winston-transport"; 
+import DailyRotateFile from "winston-daily-rotate-file";
 // ======================================================  
 // Custom Log Levels  
 // ======================================================  
@@ -96,33 +97,36 @@ const logger = winston.createLogger({
  
         new TerminalTransport(), 
  
-        // ==================================================  
-        // 2. Framework Log  
-        // Clears previous log on every test run  
-        // ==================================================  
- 
-        new winston.transports.File({ 
-            filename: "src/logs/framework.log",  
+        // ==================================================
+        // 2. Framework Log
+        // ==================================================
+
+        new DailyRotateFile({
+            filename: "src/logs/framework-%DATE%.log",
+            datePattern: "YYYY-MM-DD",
+            maxFiles: "7d",
             format: fileFormat, 
         }), 
  
-        // ==================================================  
-        // 3. Combined Log  
-        // Keeps all logs  
-        // ==================================================  
- 
-        new winston.transports.File({ 
-            filename: "src/logs/combined.log", 
+        // ==================================================
+        // 3. Combined Log
+        // ==================================================
+
+        new DailyRotateFile({
+            filename: "src/logs/combined-%DATE%.log",
+            datePattern: "YYYY-MM-DD",
+            maxFiles: "7d",
             format: fileFormat, 
         }), 
  
-        // ==================================================  
-        // 4. Error Log  
-        // Only ERROR logs  
-        // ==================================================  
- 
-        new winston.transports.File({ 
-            filename: "src/logs/error.log", 
+        // ==================================================
+        // 4. Error Log
+        // ==================================================
+
+        new DailyRotateFile({
+            filename: "src/logs/error-%DATE%.log",
+            datePattern: "YYYY-MM-DD",
+            maxFiles: "7d",
             level: "error", 
             format: fileFormat, 
         }), 

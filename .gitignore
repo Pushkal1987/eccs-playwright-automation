@@ -13,13 +13,13 @@ playwright/auth/
 *.auth.json
 
 # Environment
-.env
-.env.*
+#.env
+#.env.*
 !.env.example
 
 # Logs
 *.log
 
-# Allure
+# Reports / test-results
 allure-results/
 allure-report/

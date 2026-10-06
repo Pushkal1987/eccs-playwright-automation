@@ -19,6 +19,11 @@ function getRequiredEnvironmentVariable(name: string): string {
 export const env = {
   baseUrl: getRequiredEnvironmentVariable('BASE_URL'),
 
+  rmsAdmin: {
+    username: getRequiredEnvironmentVariable('RMS_ADMIN_USERNAME'),
+    password: getRequiredEnvironmentVariable('RMS_ADMIN_PASSWORD'),
+  },
+
   courier: {
     username: getRequiredEnvironmentVariable('COURIER_USERNAME'),
     password: getRequiredEnvironmentVariable('COURIER_PASSWORD'),
@@ -48,4 +53,20 @@ export const env = {
     username: getRequiredEnvironmentVariable('SUPERINTENDENT_USERNAME'),
     password: getRequiredEnvironmentVariable('SUPERINTENDENT_PASSWORD'),
   },  
+
+  customGA: {
+    username: getRequiredEnvironmentVariable('CUSTOM_GA_USERNAME'),
+    password: getRequiredEnvironmentVariable('CUSTOM_GA_PASSWORD'),
+  },
+
+  courierGA: {
+    username: getRequiredEnvironmentVariable('COURIER_GA_USERNAME'),
+    password: getRequiredEnvironmentVariable('COURIER_GA_PASSWORD'),
+  },
+
+  custodianGA: {
+    username: getRequiredEnvironmentVariable('CUSTODIAN_GA_USERNAME'),
+    password: getRequiredEnvironmentVariable('CUSTODIAN_GA_PASSWORD'),
+  },
+  
 } as const;

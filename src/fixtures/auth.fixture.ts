@@ -102,16 +102,11 @@ export const test = base.extend<AuthFixtures>({
 }); */
             catch (error) {
 
-                /*
-                 * Step 5: Saved session expired
-                 */
-                Logger.warn(
-                    `[${role}] Saved session is expired or invalid.`
-                );
+                // Step 5: Saved session expired
 
-                Logger.debug(
-                    `[${role}] Closing expired browser context.`
-                );
+                Logger.warn(`[${role}] Saved session is expired or invalid.`);
+
+                Logger.debug(`[${role}] Closing expired browser context.`);
 
                 await context.close();
 
@@ -121,33 +116,23 @@ export const test = base.extend<AuthFixtures>({
                     contexts.splice(contextIndex, 1);
                 }
 
-                Logger.debug(
-                    `[${role}] Removing expired storage state.`
-                );
+                Logger.debug(`[${role}] Removing expired storage state.`);
 
                 fs.rmSync(storagePath, {
                     force: true
                 });
 
-                Logger.info(
-                    `[${role}] Starting fresh authentication.`
-                );
+                Logger.info(`[${role}] Starting fresh authentication.`);
 
-                /*
-                 * Step 6: Perform fresh authentication
-                 */
+                // Step 6: Perform fresh authentication
+
                 await authenticateUser(browser, role);
 
-                Logger.success(
-                    `[${role}] Fresh authentication completed.`
-                );
+                Logger.success(`[${role}] Fresh authentication completed.`);
 
-                /*
-                 * Step 7: Create new authenticated context
-                 */
-                Logger.debug(
-                    `[${role}] Creating new context with fresh session.`
-                );
+                // Step 7: Create new authenticated context
+
+                Logger.debug(`[${role}] Creating new context with fresh session.`);
 
                 context = await browser.newContext({
                     storageState: storagePath
@@ -155,25 +140,17 @@ export const test = base.extend<AuthFixtures>({
 
                 contexts.push(context);
 
-                Logger.debug(
-                    `[${role}] New authenticated context created.`
-                );
+                Logger.debug(`[${role}] New authenticated context created.`);
 
                 const page = await context.newPage();
 
-                Logger.debug(
-                    `[${role}] New authenticated page created.`
-                );
+                Logger.debug(`[${role}] New authenticated page created.`);
 
-                pomObj = new PageObjectsManager(page);
+                let pomObj = new PageObjectsManager(page);
 
-                Logger.debug(
-                    `[${role}] New PageObjectsManager created.`
-                );
+                Logger.debug(`[${role}] New PageObjectsManager created.`);
 
-                Logger.info(
-                    `========== AUTH REQUEST COMPLETED: ${role} ==========`
-                );
+                Logger.info(`========== AUTH REQUEST COMPLETED: ${role} ==========`);
 
                 return pomObj;
             }
@@ -181,26 +158,21 @@ export const test = base.extend<AuthFixtures>({
 
         await use(userLogin);
 
-        /*
-         * Close all role contexts created by this test
-         */
-        Logger.info(
-            `Closing ${contexts.length} role context(s) for test: ${testInfo.title}`
-        );
+        // Close all role contexts created by this test
 
-        await Promise.all(
-            contexts.map(async (context) => {
-                try {
-                    await context.close();
-                } catch (error) {
-                    Logger.warn(
-                        `Failed to close browser context: ${error instanceof Error
-                            ? error.message
-                            : String(error)
-                        }`
-                    );
-                }
-            })
+        Logger.info(`Closing ${contexts.length} role context(s) for test: ${testInfo.title}`);
+
+        await Promise.all(contexts.map(async (context) => {
+            try {
+                await context.close();
+            } catch (error) {
+                Logger.warn(`Failed to close browser context: ${error instanceof Error
+                        ? error.message
+                        : String(error)
+                    }`
+                );
+            }
+        })
         );
 
         Logger.info('========== USER LOGIN FIXTURE END ==========');

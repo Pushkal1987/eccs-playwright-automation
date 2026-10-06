@@ -18,9 +18,11 @@ export class HomePage extends BasePage {
     this.mainMenuLocators = page.locator('#main-menu-sz > li.nav-item > a.nav-link');
   }
 
+  
   async waitForHomeReady(timeout = 120000): Promise<void> {
-    await this.workSummaryHeader.waitFor({ state: 'visible', timeout });
+    await this.logoutButton.waitFor({ state: 'visible', timeout });
   }
+  
 
   async getLoggedInUser(): Promise<string> {
     const loggedInText = await this.loggedInUser.textContent();

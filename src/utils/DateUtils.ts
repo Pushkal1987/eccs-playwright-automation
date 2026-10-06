@@ -27,16 +27,19 @@ export class DateUtils {
 
         const now = new Date();
 
-        const date = this.getCurrentDate()
-            .split('/')
-            .reverse()
-            .join('');
+        //const date = new Date();
+
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const year = now.getFullYear();
+
+        //return `${day}${month}${year}`;
         const time = this.getCurrentTime()
             .replace(/:/g, '');
         const milliseconds = String(now.getMilliseconds())
-        .padStart(3, '0');
+            .padStart(3, '0');
 
-        return `${date}${time}${milliseconds}`;
+        return `${day}${month}${year}${time}${milliseconds}`;
     }
 
     static getTimestamp(): number {

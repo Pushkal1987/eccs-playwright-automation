@@ -10,7 +10,7 @@ import type { ReportingLabsOptions } from 'reporting-labs';
 const config: ReportingLabsOptions = {
 
   // ── Look ─────────────────────────────────────────────────────────────────────
-  title: 'ECCS Application',                       // shown in the header
+  title: 'ECCS Application Test Report',                       // shown in the header
   logo: 'eccs-logo.png',                               // your logo next to the title: a file next to this config (embedded), or an https URL
   // palette: 'lab',                                  // 'lab' (blue, default) | 'ocean' | 'ember' | 'mono'; viewers can switch
   // accent: '#7C3AED',                               // your brand color instead of the palette accent
@@ -19,7 +19,7 @@ const config: ReportingLabsOptions = {
   // embedFonts: true,                                // bundle IBM Plex (~140 KB) so it looks the same offline
 
   // ── Header details ───────────────────────────────────────────────────────────
-  // project: { name: 'ShopLite Web', version: '2.4.0', team: 'QA Platform', url: 'https://shoplite.example.com', description: '' },
+  project: { name: 'ECCS-UAT', version: '2.4.0', team: 'QA Platform', url: 'https://eccsuat.cbic.gov.in', description: 'ECCS Application Test Report' },
   metadata: {                                         // chips in the header; `build` also labels the run in the trend
     env: process.env.TEST_ENV ?? 'local',
     // build: process.env.BUILD_NUMBER ?? 'local',     // when missing, the CI run number is used
@@ -44,7 +44,7 @@ const config: ReportingLabsOptions = {
   // Tests page. Default: priority, severity, feature, owner. Add your own key when you want a chart
   // for it, e.g. meta({ team: 'web' }) + 'team' here = a "Team" tab showing pass/fail per team.
   // Keys like epic and story do not need to be here: they show as chips and links on every test anyway.
-  // dimensions: ['priority', 'severity', 'feature', 'owner', 'team'],
+  dimensions: ['priority', 'severity', 'feature', 'owner', 'team'],
   //
   // dimensionOrder: the order values appear in those charts and filters. Priority (P0..P4) and
   // severity (blocker..trivial) are already ordered. Set this only for your own values,

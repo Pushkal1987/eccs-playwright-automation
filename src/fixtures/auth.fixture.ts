@@ -1,4 +1,4 @@
-import { BrowserContext, test as base } from '@playwright/test';
+import { BrowserContext, test as base, expect } from '@playwright/test';
 import fs from 'node:fs';
 import { authenticateUser, getStorageStatePath } from '../utils/authHelper';
 import { PageObjectsManager } from '../managers/PageObjectsManager';
@@ -72,35 +72,15 @@ export const test = base.extend<AuthFixtures>({
                 Logger.step(`[${role}] Verifying authenticated home page.`);
 
                 await homePage.waitForHomeReady(10_000);
+                await homePage.verifyAvailableWorkSummaryHeadingVisible();
 
                 Logger.success(`[${role}] Saved session is valid.`);
 
                 Logger.info(`========== AUTH REQUEST COMPLETED: ${role} ==========`);
 
                 return pomObj;
-            } /*catch {
-                console.log(`[${role}] Saved session expired. Creating a new session.`);
-
-                await context.close();
-                contexts.splice(contexts.indexOf(context), 1);
-                fs.rmSync(storagePath, { force: true });
-
-                await authenticateUser(browser, role);
-
-                context = await browser.newContext({ storageState: storagePath });
-                contexts.push(context);
-                pomObj = new PageObjectsManager(await context.newPage());
-
-                return pomObj;
-            }
-        };
-
-        await use(userLogin);
-
-        await Promise.all(contexts.map((context) => context.close()));
-    },
-}); */
-            catch (error) {
+                
+            } catch (error) {
 
                 // Step 5: Saved session expired
 

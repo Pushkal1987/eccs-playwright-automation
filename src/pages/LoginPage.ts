@@ -3,6 +3,8 @@ import { routes } from '../constants/routes';
 import { BasePage } from './BasePage';
 
 export class LoginPage extends BasePage {
+
+  // Locator
   private readonly usernameInput: Locator;
   private readonly passwordInput: Locator;
   private readonly loginButton: Locator;

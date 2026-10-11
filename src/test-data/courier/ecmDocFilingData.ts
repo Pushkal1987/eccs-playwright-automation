@@ -19,7 +19,7 @@ export const ecmDocFilingData = {
 
     flightDetailsData: {
         airlines: "Aeroflot",
-        flightNumber: "A008",
+        flightNumber: "A002",
         airportOfArrival: "AMT",
         airportOfShipment: "ACC",
         dateOfArrival: DateUtils.getCurrentDate(),

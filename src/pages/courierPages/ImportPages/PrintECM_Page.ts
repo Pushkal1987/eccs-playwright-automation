@@ -86,7 +86,7 @@ export class PrintECM_page extends BasePage {
         }
     }
 
-    async enterECMReferenceNumber(ecmNumber: string): Promise<void> {
+    async enterECMReferenceNumber(ecmNumber: any): Promise<void> {
         Logger.info(`Entering ECM Reference Number: ${ecmNumber}`);
 
         if (!this.ecmReferenceNumberInput) {
@@ -109,69 +109,108 @@ export class PrintECM_page extends BasePage {
         await this.click(this.resetButton);
         await expect(this.tableBody).toBeVisible();
     }
+    /*
+        private async getECMStatusLegacy(ecmNumber: string): Promise<string> {
+            Logger.info(`Checking ECM Status for ${ecmNumber}`);
+    
+            const rows = this.tableBody.locator('tr');
+            const rowCount = await rows.count();
+    
+            for (let i = 0; i < rowCount; i++) {
+                const row = rows.nth(i);
+    
+                const ecmText = await row.locator('td:nth-child(2)').textContent();
+    
+                if (ecmText?.trim() === ecmNumber) {
+                    const status = await row.locator('td:nth-child(5)').textContent();
+    
+                    Logger.info(`ECM Number: ${ecmNumber} Status: ${status}`);
+                    return status?.trim() ?? '';
+                }
+            }
+            await this.page.waitForFunction(
+                (number) => {
+                    const row = Array.from(document.querySelectorAll('tr')).find((candidate) =>
+                        Array.from(candidate.cells).some((cell) => cell.textContent?.trim() === number),
+                    );
+                    return Boolean(row?.cells[4]?.textContent?.trim());
+                },
+                ecmNumber,
+                { timeout: 10000 },
+            );
+            return this.getECMStatus(ecmNumber);
+        }
+    
+        async getECMStatus(ecmNumber: any): Promise<string> {
+    
+            Logger.info(`Checking ECM Status for ECM Number: ${ecmNumber}`);
+    
+            if (!ecmNumber?.trim()) {
+                throw new Error('ECM Number is null or empty');
+            }
+            await this.page.waitForFunction(
+                (number) => {
+                    const row = Array.from(document.querySelectorAll('tr')).find((candidate) =>
+                        Array.from(candidate.cells).some((cell) => cell.textContent?.trim() === number),
+                    );
+                    return Boolean(row?.cells[4]?.textContent?.trim());
+                },
+                ecmNumber,
+                { timeout: 10000 },
+            );
+    
+            const row = this.page.locator('tr').filter({ hasText: ecmNumber }).first();
+            
+            const status = (await row.locator('td').nth(4).innerText()).trim();
+            
+            if (!status) {
+                throw new Error(`Status is empty for ECM Number ${ecmNumber}`);
+            }
+    
+            Logger.info(`ECM Number: ${ecmNumber} status is "${status}"`);
+            return status;
+        }
+            */
 
-    private async getECMStatusLegacy(ecmNumber: string): Promise<string> {
-        Logger.info(`Checking ECM Status for ${ecmNumber}`);
+    async getECMStatus(ecmNumber: string): Promise<string> {
+        const number = ecmNumber?.trim();
+
+        if (!number) {
+            throw new Error('ECM Number: ${number} is not available');
+        }
+
+        Logger.info(`Checking ECM status for ${number}`);
+
+        // Wait until the table body is visible.
+        await expect(this.tableBody).toBeVisible();
 
         const rows = this.tableBody.locator('tr');
+
+        // Wait until at least one row is visible.
+        await expect(rows.first()).toBeVisible();
+
         const rowCount = await rows.count();
+        let status = '';
 
         for (let i = 0; i < rowCount; i++) {
             const row = rows.nth(i);
+            const ecmText = (await row.locator('td').nth(1).innerText()).trim();
 
-            const ecmText = await row.locator('td:nth-child(2)').textContent();
-
-            if (ecmText?.trim() === ecmNumber) {
-                const status = await row.locator('td:nth-child(5)').textContent();
-
-                Logger.info(`ECM Number: ${ecmNumber} Status: ${status}`);
-                return status?.trim() ?? '';
+            if (ecmText === number) {
+                status = (await row.locator('td').nth(4).innerText()).trim();
+                break; // Stop once the matching ECM row is found.
             }
         }
-        await this.page.waitForFunction(
-            (number) => {
-                const row = Array.from(document.querySelectorAll('tr')).find((candidate) =>
-                    Array.from(candidate.cells).some((cell) => cell.textContent?.trim() === number),
-                );
-                return Boolean(row?.cells[4]?.textContent?.trim());
-            },
-            ecmNumber,
-            { timeout: 10000 },
-        );
-        return this.getECMStatus(ecmNumber);
-    }
 
-    async getECMStatus(ecmNumber: string): Promise<string> {
-
-        Logger.info(`Checking ECM Status for ECM Number: ${ecmNumber}`);
-
-        if (!ecmNumber?.trim()) {
-            throw new Error('ECM Number is null or empty');
-        }
-        await this.page.waitForFunction(
-            (number) => {
-                const row = Array.from(document.querySelectorAll('tr')).find((candidate) =>
-                    Array.from(candidate.cells).some((cell) => cell.textContent?.trim() === number),
-                );
-                return Boolean(row?.cells[4]?.textContent?.trim());
-            },
-            ecmNumber,
-            { timeout: 10000 },
-        );
-
-        const row = this.page.locator('tr').filter({ hasText: ecmNumber }).first();
-        
-        const status = (await row.locator('td').nth(4).innerText()).trim();
-        
         if (!status) {
-            throw new Error(`Status is empty for ECM Number ${ecmNumber}`);
+            throw new Error(`Status not found for ECM Number ${number}`);
         }
 
-        Logger.info(`ECM Number: ${ecmNumber} status is "${status}"`);
+        Logger.info(`ECM Number: ${number} status is "${status}"`);
         return status;
     }
 
-    async printECM(ecmNumber: string): Promise<void> {
+    async printECM(ecmNumber: string | null): Promise<void> {
         Logger.info(`Print ECM started for ECM: ${ecmNumber}`);
 
         await this.selectMenu();

@@ -551,7 +551,7 @@ export class FileECM_DOC_Page extends BasePage {
     }
 
     // Fill Complete Form
-    async fileFreshECMDocument(): Promise<string | null> {
+    async fileFreshECMDocument(): Promise<string> {
 
         Logger.step('Starting Fresh ECM Document Filing');
 
@@ -609,19 +609,15 @@ export class FileECM_DOC_Page extends BasePage {
             const errorMessage =
                 await this.getText(this.flightAlreadyInitiatedErrorMsg);
 
-            Logger.warn(`ECM filing was not completed. Application message: ${errorMessage}`);
-
-            return null;
-        } else {
-
-            // Return generated ECM reference number.
-            //await this.getECMNumber();
-
-            const ecmNumber = await this.getECMNumber();
-
-            Logger.success(`Fresh ECM Document filed successfully. ECM Number: ${ecmNumber}`);
-
-            return ecmNumber;
+            Logger.warn(`ECM filing was already initiated for this flight. Application message: ${errorMessage}`);
+            throw new Error('No ECM number is available to check the filing status.');
         }
+
+        const ecmNumber = await this.getECMNumber();
+
+        Logger.success('ECM Number generated successfully.');
+        Logger.success(`Fresh ECM Document filed successfully. ECM Number: ${ecmNumber}`);
+
+        return ecmNumber;
     }
 }

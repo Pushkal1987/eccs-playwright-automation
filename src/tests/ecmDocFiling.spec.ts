@@ -3,9 +3,9 @@ import { test, expect } from '../fixtures/auth.fixture';
 import { Logger } from '../utils/LoggerUtils'
 
 test.describe('Verify ECM Document Fresh Filing', () => {
-
-    let ecmNumber: string | null = null;
     test.describe.configure({ mode: "serial" });
+
+    let ecmNumber: string = "";
 
     test('Verify ECM Document Fresh Filing', async ({ userLogin }) => {
 
@@ -20,43 +20,22 @@ test.describe('Verify ECM Document Fresh Filing', () => {
 
         const courierPage = pageObjectsManager.getPage();
         const fileECMDocPage = pageObjectsManager.getFileECMDOCPage();
+        const printECMPage = pageObjectsManager.getPrintECMPage()
 
         await courierPage.goto('/eccs');
-        await expect(courierPage.getByText('AVAILABLE WORK SUMMARY')).toBeVisible();
+        //await expect(courierPage.getByText('AVAILABLE WORK SUMMARY')).toBeVisible();
 
         // Complete ECM Document filing business flow.
-        //await fileECMDocPage.fileFreshECMDocument();
         ecmNumber = await fileECMDocPage.fileFreshECMDocument();
 
-        if (ecmNumber) {
-            Logger.success(`ECM Number generated in test: ${ecmNumber}`);
-        } else {
-            Logger.warn('ECM filing was already initiated for this flight.');
-        }
-    })
-
-    test(`Verify ECM Number Status`, async ({ userLogin}) => {
-        meta({
-            priority: 'P3',
-            severity: 'minor',
-            owner: 'Pushkal R. Shripad',
-            feature: 'Print ECM'
-        });
-
-        if (ecmNumber === null) {
-            throw new Error('Cannot verify ECM status because the filing test did not capture an ECM number.');
-        }
-
-        const pageObjectsManager = await userLogin('COURIER');
-
-        const courierPage = pageObjectsManager.getPage();
-        const printECMPage = pageObjectsManager.getPrintECMPage();
-
-        await courierPage.goto('/eccs');
-        await expect(courierPage.getByText('AVAILABLE WORK SUMMARY')).toBeVisible();
+        // Check ECM status
+        Logger.info(`Checking ECM status for ${ecmNumber}`);
 
         await printECMPage.printECM(ecmNumber);
-        await printECMPage.getECMStatus(ecmNumber);
+        const status: string = await printECMPage.getECMStatus(ecmNumber);
+
+        await expect(status).toContain('FILED');
+        Logger.success(`ECM: "${ecmNumber}", Status: "${status}" validated successfully.`)
     })
 
     test('Verify Feed IGM Number', async ({ userLogin }) => {
@@ -73,11 +52,16 @@ test.describe('Verify ECM Document Fresh Filing', () => {
         const feedIGMNumberPage = pageObjectsManager.getFeedIGMNumberPage()
 
         await courierPage.goto('/eccs');
-        await expect(courierPage.getByText('AVAILABLE WORK SUMMARY')).toBeVisible();
+        //await expect(courierPage.getByText('AVAILABLE WORK SUMMARY')).toBeVisible();
 
         await feedIGMNumberPage.selectMenu();
         const heading = await feedIGMNumberPage.getIGMNumberUpdationHeading();
         Logger.info(`Heading in Test: ${heading}`);
+
+        await feedIGMNumberPage.clickECMRefernceNumberHyperlink(ecmNumber);
+        Logger.info(`ECM NUmber in Feed IGM: ${ecmNumber}`);
+
+        await feedIGMNumberPage.verifyECMDetails(ecmNumber);
     })
 
 })
